@@ -1,7 +1,7 @@
 {
   "name": "module-maker",
   "version": "0.0.1",
-  "description": "Make an ordinary JavaScript object into a superheroic module (CommonJS, AMD, or namespaced global)",
+  "description": "Make an ordinary JavaScript object into a superheroic module (CommonJS, AMD, or global)",
   "main": "module-maker.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
