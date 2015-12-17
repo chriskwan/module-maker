@@ -1,6 +1,6 @@
 {
   "name": "module-maker",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Make an ordinary JavaScript object into a superheroic module (CommonJS, AMD, or global)",
   "main": "module-maker.js",
   "scripts": {
