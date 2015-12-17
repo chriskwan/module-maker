@@ -24,8 +24,11 @@ var moduleMaker = require("module-maker");
 // (it will try to make both CommonJS and AMD modules
 // and fallback to making a global if neither of those work)
 moduleMaker.make(Greeter, "Greeter"); // or moduleMaker.make(Greeter);
+```
 
-// Other available methods
+## Other Available Methods
+
+```
 moduleMaker.make(Greeter); // Will make an anonymous AMD module
 moduleMaker.makeCommonJS(Greeter, "Greeter"); // or moduleMaker.makeCommonJS(Greeter);
 moduleMaker.makeAmd(Greeter, "Greeter"); // or moduleMaker.makeAmd(Greeter);
