@@ -2,9 +2,10 @@
   "name": "module-maker",
   "version": "1.0.0",
   "description": "Make an ordinary JavaScript object into a superheroic module (CommonJS, AMD, or global)",
-  "main": "module-maker.js",
+  "main": "lib/module-maker.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel src -d lib"
   },
   "publishConfig": {
     "registry": "https://registry.npmjs.org"
@@ -33,5 +34,8 @@
   "bugs": {
     "url": "https://github.com/chriskwan/module-maker/issues"
   },
-  "homepage": "https://github.com/chriskwan/module-maker#readme"
+  "homepage": "https://github.com/chriskwan/module-maker#readme",
+  "devDependencies": {
+    "babel-cli": "^6.3.17"
+  }
 }
