@@ -17,20 +17,33 @@ var Greeter = {
     }
 };
 
-// Get the Module Maker
-var moduleMaker = require("module-maker");
-
 // Make a module out of your object
 // (it will try to make both CommonJS and AMD modules
 // and fallback to making a global if neither of those work)
-moduleMaker.make(Greeter, "Greeter"); // or moduleMaker.make(Greeter);
+
+var moduleMaker = require("module-maker");
+moduleMaker.make({
+    obj: Greeter,
+    moduleObj: module,
+    name: "Greeter" // omit if you want to make an anonymous AMD module
+});
 ```
 
 ## Other Available Methods
 
 ```
-moduleMaker.make(Greeter); // Will make an anonymous AMD module
-moduleMaker.makeCommonJS(Greeter, "Greeter"); // or moduleMaker.makeCommonJS(Greeter);
-moduleMaker.makeAmd(Greeter, "Greeter"); // or moduleMaker.makeAmd(Greeter);
-moduleMaker.makeGlobal(Greeter, "Greeter");
+moduleMaker.makeCommonJS({
+    obj: Greeter,
+    moduleObj: module
+});
+
+moduleMaker.makeAMD({
+    obj: Greeter,
+    name: "Greeter" // omit if you want to make an anonymous AMD module
+});
+
+moduleMaker.makeGlobal({
+    obj: Greeter,
+    name: "Greeter"
+});
 ```
