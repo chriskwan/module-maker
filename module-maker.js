@@ -11,7 +11,7 @@ var makeCommonJS = function (options) {
     var moduleObj = options.moduleObj;
     var name = options.name;
 
-    if (typeof moduleObj !== 'undefined' && moduleObj.exports) {
+    if (moduleObj && moduleObj.exports) {
         moduleObj.exports = obj;
         return true;
     }
@@ -93,8 +93,16 @@ var ModuleMaker = {
 
 // Eat own dogfood:
 // ModuleMaker uses its own methods to make itself into a module :)
-ModuleMaker.make({
-    obj: ModuleMaker,
-    moduleObj: module,
-    name: "ModuleMaker" // Important to specify name. Otherwise, this will override other anonymous AMD modules
-});
+var moduleObj;
+try {
+    moduleObj = module;
+} catch (ex) {
+    console.log("The module object is not defined. You are probably running this in a browser without Browserifying. Setting it to null in this case.");
+    moduleObj = null;
+} finally {
+    ModuleMaker.make({
+        obj: ModuleMaker,
+        moduleObj: moduleObj,
+        name: "ModuleMaker" // Important to specify name. Otherwise, this will override other anonymous AMD modules
+    });
+}
