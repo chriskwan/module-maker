@@ -6,32 +6,26 @@
 // Returns true if a module was successfully created
 // NOTE: Important to pass in a reference to the `module` object from the caller's scope
 // otherwise ModuleMaker would use the `module` object in its own scope
-var makeCommonJS = function (options) {
-    var obj = options.obj;
-    var moduleObj = options.moduleObj;
-    var name = options.name;
-
+var makeCommonJS = ({ obj, moduleObj, name }) => 
+{
     if (moduleObj && moduleObj.exports) {
         moduleObj.exports = obj;
         return true;
     }
-
     return false;
 };
 
 // Make an AMD module out of the object
 // Returns true if a module was successfully created
-var makeAMD = function (options) {
-    var obj = options.obj;
-    var name = options.name;
-
+var makeAMD =  ({ obj, moduleObj, name }) => 
+{
     if (typeof define === 'function' && define.amd) {
         if (name) {
-            define(name, [], function () {
+            define(name, [], function() {
                 return obj;
             });
         } else {
-            define([], function () {
+            define([], function() {
                 return obj;
             });
         }
@@ -44,10 +38,8 @@ var makeAMD = function (options) {
 // Store the object as a global variable
 // Returns true if a global variable was successfully created
 // (only recommended if you cannot make an actual module)
-var makeGlobal = function (options) {
-    var obj = options.obj;
-    var name = options.name;
-
+var makeGlobal = ({ obj, name }) => 
+{
     var globalObj = null;
     if (typeof global !== 'undefined') {
         globalObj = global;
@@ -70,25 +62,32 @@ var makeGlobal = function (options) {
 // - obj: the object to make into a module
 // - moduleObj: a reference to the caller's module object (just pass in the word module)
 // - name: used for AMD (optional) and global objects (required)
-var make = function (options) {
-    var isCommonJSMade = makeCommonJS(options);
-    var isAMDMade = makeAMD(options);
+var make = ({ obj, moduleObj, name }) => 
+{
+    var isCommonJSMade = makeCommonJS({
+        obj, moduleObj, name
+    });
+    var isAMDMade = makeAMD({
+        obj, moduleObj, name
+    });
 
     var isModuleMade = isCommonJSMade || isAMDMade;
 
     // Only resort to making a global if you could not make a proper module
     if (!isModuleMade) {
-        return makeGlobal(options);
+        return makeGlobal({
+            obj, name
+        });
     }
 
     return isModuleMade;
 };
 
 var ModuleMaker = {
-    make: make,
-    makeCommonJS: makeCommonJS,
-    makeAMD: makeAMD,
-    makeGlobal: makeGlobal
+    make,
+    makeCommonJS,
+    makeAMD,
+    makeGlobal
 };
 
 // Eat own dogfood:
