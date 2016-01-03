@@ -6,8 +6,7 @@
 // Returns true if a module was successfully created
 // NOTE: Important to pass in a reference to the `module` object from the caller's scope
 // otherwise ModuleMaker would use the `module` object in its own scope
-var makeCommonJS = ({ obj, moduleObj, name }) => 
-{
+var makeCommonJS = ({ obj, moduleObj, name }) => {
     if (moduleObj && moduleObj.exports) {
         moduleObj.exports = obj;
         return true;
@@ -17,8 +16,7 @@ var makeCommonJS = ({ obj, moduleObj, name }) =>
 
 // Make an AMD module out of the object
 // Returns true if a module was successfully created
-var makeAMD =  ({ obj, moduleObj, name }) => 
-{
+var makeAMD =  ({ obj, moduleObj, name }) => {
     if (typeof define === 'function' && define.amd) {
         if (name) {
             define(name, [], function() {
@@ -38,8 +36,7 @@ var makeAMD =  ({ obj, moduleObj, name }) =>
 // Store the object as a global variable
 // Returns true if a global variable was successfully created
 // (only recommended if you cannot make an actual module)
-var makeGlobal = ({ obj, name }) => 
-{
+var makeGlobal = ({ obj, name }) => {
     var globalObj = null;
     if (typeof global !== 'undefined') {
         globalObj = global;
@@ -62,8 +59,7 @@ var makeGlobal = ({ obj, name }) =>
 // - obj: the object to make into a module
 // - moduleObj: a reference to the caller's module object (just pass in the word module)
 // - name: used for AMD (optional) and global objects (required)
-var make = ({ obj, moduleObj, name }) => 
-{
+var make = ({ obj, moduleObj, name }) => {
     var isCommonJSMade = makeCommonJS({
         obj, moduleObj, name
     });
