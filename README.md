@@ -29,7 +29,7 @@ moduleMaker.make({
 });
 ```
 
-## Other Available Methods
+### Other Available Methods
 
 ```
 moduleMaker.makeCommonJS({
@@ -47,3 +47,9 @@ moduleMaker.makeGlobal({
     name: "Greeter"
 });
 ```
+
+## Building
+
+1. Run `npm install` to get dependencies
+1. Make changes to `src/module-maker.js` (in ES6/ES2015)
+1. Run `npm run build` to generate output file `lib\module-maker.js`
