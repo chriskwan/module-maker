@@ -24,7 +24,7 @@ var Greeter = {
 var moduleMaker = require("module-maker");
 moduleMaker.make({
     obj: Greeter,
-    moduleObj: module,
+    moduleObj: module, // the actual reserved word
     name: "Greeter" // omit if you want to make an anonymous AMD module
 });
 ```
@@ -34,7 +34,7 @@ moduleMaker.make({
 ```
 moduleMaker.makeCommonJS({
     obj: Greeter,
-    moduleObj: module
+    moduleObj: module // the actual reserved word
 });
 
 moduleMaker.makeAMD({
